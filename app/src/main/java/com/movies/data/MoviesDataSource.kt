@@ -7,7 +7,9 @@ import com.movies.api.MoviesService
 import com.movies.model.Movie
 import kotlinx.coroutines.runBlocking
 
-class MovieDataSource(private val service: MoviesService) : PageKeyedDataSource<Int, Movie>() {
+class MoviesDataSource(
+    private val service: MoviesService
+) : PageKeyedDataSource<Int, Movie>() {
 
     val networkState = MutableLiveData<NetworkState>()
 
@@ -20,6 +22,7 @@ class MovieDataSource(private val service: MoviesService) : PageKeyedDataSource<
                 try {
                     networkState.postValue(NetworkState.LOADING)
                     val movies = service.getMovies(1, params.requestedLoadSize)
+//                    Log.i("MOVIELOG", "Initial load: ${movies.results.size} Movies")
                     callback.onResult(movies.results, null, 2)
                     networkState.postValue(NetworkState.SUCCESS)
                 } catch (ex: Exception) {
@@ -40,6 +43,7 @@ class MovieDataSource(private val service: MoviesService) : PageKeyedDataSource<
                     networkState.postValue(NetworkState.LOADING)
                     val page = params.key
                     val movies = service.getMovies(1, params.requestedLoadSize)
+//                    Log.i("MOVIELOG", "Initial load: ${movies.results.size} Movies")
                     callback.onResult(movies.results, page + 1)
                     networkState.postValue(NetworkState.SUCCESS)
                 } catch (ex: Exception) {

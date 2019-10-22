@@ -5,13 +5,13 @@ import androidx.paging.DataSource
 import com.movies.api.MoviesService
 import com.movies.model.Movie
 
-class MovieDataSourceFactory(private val service: MoviesService) : DataSource.Factory<Int, Movie>() {
+class MoviesDataSourceFactory(private val service: MoviesService) : DataSource.Factory<Int, Movie>() {
 
-    val movieLiveData = MutableLiveData<MovieDataSource>()
+    val moviesLiveData = MutableLiveData<MoviesDataSource>()
 
     override fun create(): DataSource<Int, Movie> {
-        val source = MovieDataSource(service)
-        movieLiveData.postValue(source)
+        val source = MoviesDataSource(service)
+        moviesLiveData.postValue(source)
         return source
     }
 

@@ -8,9 +8,9 @@ import com.movies.model.Movie
 import java.util.concurrent.Executors
 import javax.inject.Inject
 
-class MovieRepository @Inject constructor(private val service: MoviesService) {
+class MoviesRepository @Inject constructor(private val service: MoviesService) {
 
-    fun getMovies(dataSourceFactory: MovieDataSourceFactory): LiveData<PagedList<Movie>> {
+    fun getMovies(dataSourceFactory: MoviesDataSourceFactory): LiveData<PagedList<Movie>> {
         val pagedList = PagedList.Config.Builder()
             .setEnablePlaceholders(true)
             .setInitialLoadSizeHint(INITIAL_LOAD_SIZE)
@@ -24,8 +24,8 @@ class MovieRepository @Inject constructor(private val service: MoviesService) {
             .build()
     }
 
-    fun createMoviesDataSource(): MovieDataSourceFactory {
-        return MovieDataSourceFactory(service)
+    fun createMoviesDataSource(): MoviesDataSourceFactory {
+        return MoviesDataSourceFactory(service)
     }
 
     companion object {
