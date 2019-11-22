@@ -7,7 +7,7 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-interface MoviesService {
+interface MoviesApi {
 
     @GET("/3/movie/now_playing")
     suspend fun getMovies(

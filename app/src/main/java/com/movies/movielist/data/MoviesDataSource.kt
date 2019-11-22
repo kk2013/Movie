@@ -3,12 +3,13 @@ package com.movies.movielist.data
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PageKeyedDataSource
 import com.chuck.util.wrapEspressoIdlingResource
-import com.movies.api.MoviesService
+import com.movies.api.MoviesApi
+import com.movies.data.NetworkState
 import com.movies.model.Movie
 import kotlinx.coroutines.runBlocking
 
 class MoviesDataSource(
-    private val service: MoviesService
+    private val service: MoviesApi
 ) : PageKeyedDataSource<Int, Movie>() {
 
     val networkState = MutableLiveData<NetworkState>()

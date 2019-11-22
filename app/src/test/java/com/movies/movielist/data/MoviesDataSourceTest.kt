@@ -4,21 +4,18 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import androidx.paging.PageKeyedDataSource
 import com.movies.TestCoroutineRule
-import com.movies.api.MoviesService
+import com.movies.api.MoviesApi
+import com.movies.data.NetworkState
+import com.movies.data.Status
 import com.movies.model.Movie
 import com.movies.model.Movies
-import com.nhaarman.mockito_kotlin.any
-import com.nhaarman.mockito_kotlin.never
-import com.nhaarman.mockito_kotlin.verify
-import com.nhaarman.mockito_kotlin.whenever
+import com.nhaarman.mockito_kotlin.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.mockito.Mock
-import org.mockito.MockitoAnnotations
 import retrofit2.HttpException
 
 @ExperimentalCoroutinesApi
@@ -30,14 +27,10 @@ class MoviesDataSourceTest {
     @get:Rule
     val coroutineTestRule = TestCoroutineRule()
 
-    @Mock
-    private lateinit var mockInitialCallback: PageKeyedDataSource.LoadInitialCallback<Int, Movie>
-    @Mock
-    private lateinit var mockCallback: PageKeyedDataSource.LoadCallback<Int, Movie>
-    @Mock
-    private lateinit var mockService: MoviesService
-    @Mock
-    lateinit var mockHttpException: HttpException
+    private var mockInitialCallback: PageKeyedDataSource.LoadInitialCallback<Int, Movie> = mock()
+    private var mockCallback: PageKeyedDataSource.LoadCallback<Int, Movie> = mock()
+    private var mockService: MoviesApi = mock()
+    private var mockHttpException: HttpException = mock()
 
     private val mockInitialParams: PageKeyedDataSource.LoadInitialParams<Int> =
         PageKeyedDataSource.LoadInitialParams(2, true)
@@ -52,8 +45,6 @@ class MoviesDataSourceTest {
 
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
-
         observer = Observer {
             actualValues.plusAssign(it)
         }

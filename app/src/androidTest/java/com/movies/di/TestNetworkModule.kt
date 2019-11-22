@@ -1,7 +1,7 @@
 package com.movies.di
 
 import com.movies.BuildConfig
-import com.movies.api.MoviesService
+import com.movies.api.MoviesApi
 import com.movies.utils.LiveDataCallAdapterFactory
 import dagger.Module
 import dagger.Provides
@@ -87,6 +87,6 @@ class TestNetworkModule {
 
     @Provides
     @Singleton
-    fun providesMovieService(retrofit: Retrofit): MoviesService =
-        retrofit.create(MoviesService::class.java)
+    fun providesMovieService(retrofit: Retrofit): MoviesApi =
+        retrofit.create(MoviesApi::class.java)
 }

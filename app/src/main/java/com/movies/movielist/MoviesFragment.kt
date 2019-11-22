@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.movies.R
 import com.movies.databinding.FragmentMoviesBinding
 import com.movies.di.ViewModelFactory
-import com.movies.movielist.data.NetworkState
+import com.movies.data.NetworkState
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_movies.*
 import javax.inject.Inject
@@ -27,7 +27,12 @@ class MoviesFragment : DaggerFragment() {
         viewModelFactory
     }
 
-    private val moviesAdapter: MoviesAdapter = MoviesAdapter()
+    private val moviesAdapter: MoviesAdapter = MoviesAdapter(onClickListener = { view, id -> getMovieDetails(view, id)})
+
+    private fun getMovieDetails(view: View, id: String) {
+//        moviesViewModel.getMovieDetails(id)
+    }
+
     private lateinit var gridLayoutManager: GridLayoutManager
 
     override fun onCreateView(
@@ -58,7 +63,7 @@ class MoviesFragment : DaggerFragment() {
         binding.moviesRecyclerView.layoutManager = gridLayoutManager
         binding.moviesRecyclerView.adapter = moviesAdapter
 
-        moviesViewModel.moviesRepo.observe(this, Observer {
+        moviesViewModel.moviesList.observe(this, Observer {
             moviesAdapter.submitList(it)
         })
         moviesViewModel.networkState?.observe(this, Observer {
@@ -67,7 +72,6 @@ class MoviesFragment : DaggerFragment() {
                 NetworkState.SUCCESS -> progress_bar.visibility = View.GONE
                 NetworkState.FAILED -> progress_bar.visibility = View.GONE
             }
-//            moviesAdapter.setNetworkState(it)
         })
 
         return binding.root

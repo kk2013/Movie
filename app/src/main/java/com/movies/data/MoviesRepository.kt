@@ -1,14 +1,15 @@
-package com.movies.movielist.data
+package com.movies.data
 
 import androidx.lifecycle.LiveData
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
-import com.movies.api.MoviesService
+import com.movies.api.MoviesApi
 import com.movies.model.Movie
+import com.movies.movielist.data.MoviesDataSourceFactory
 import java.util.concurrent.Executors
 import javax.inject.Inject
 
-class MoviesRepository @Inject constructor(private val service: MoviesService) {
+class MoviesRepository @Inject constructor(private val moviesApi: MoviesApi) {
 
     fun getMovies(dataSourceFactory: MoviesDataSourceFactory): LiveData<PagedList<Movie>> {
         val pagedList = PagedList.Config.Builder()
@@ -25,8 +26,10 @@ class MoviesRepository @Inject constructor(private val service: MoviesService) {
     }
 
     fun createMoviesDataSource(): MoviesDataSourceFactory {
-        return MoviesDataSourceFactory(service)
+        return MoviesDataSourceFactory(moviesApi)
     }
+
+    suspend fun getMovieDetails(movieId: String): Movie = moviesApi.getMovieDetail(movieId)
 
     companion object {
         const val PAGE_SIZE = 12

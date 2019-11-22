@@ -18,6 +18,7 @@ class MovieViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             .resize(IMAGE_WIDTH, IMAGE_HEIGHT)
             .centerCrop()
             .into(itemView.movieImage)
+        itemView.setOnClickListener{ view ->  }
     }
 
     companion object {

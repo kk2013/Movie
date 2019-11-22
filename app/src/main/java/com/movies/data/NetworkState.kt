@@ -1,4 +1,4 @@
-package com.movies.movielist.data
+package com.movies.data
 
 enum class Status {
     LOADING,

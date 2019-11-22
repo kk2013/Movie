@@ -1,7 +1,8 @@
 package com.movies.di
 
 import androidx.lifecycle.ViewModel
-import com.movies.moviedetail.MovieDetailsFragment
+import com.movies.moviedetails.MovieDetailsFragment
+import com.movies.moviedetails.MovieDetailsViewModel
 import com.movies.movielist.MoviesFragment
 import com.movies.movielist.MoviesViewModel
 import dagger.Binds
@@ -22,4 +23,9 @@ abstract class MoviesModule {
     @IntoMap
     @ViewModelKey(MoviesViewModel::class)
     abstract fun bindsMoviesViewModel(viewModel: MoviesViewModel) : ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MovieDetailsViewModel::class)
+    abstract fun bindsMovieDetailsViewModel(viewModel: MovieDetailsViewModel) : ViewModel
 }
