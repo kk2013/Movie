@@ -11,14 +11,19 @@ import kotlinx.android.synthetic.main.movie_item_row.view.*
 
 class MovieViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-    fun bind(movie: Movie?) {
-        Picasso.get()
-            .load(IMAGE_URL + movie?.poster_path)
-            .placeholder(android.R.drawable.ic_menu_camera)
-            .resize(IMAGE_WIDTH, IMAGE_HEIGHT)
-            .centerCrop()
-            .into(itemView.movieImage)
-        itemView.setOnClickListener{ view ->  }
+    fun bind(
+        movie: Movie?,
+        onClickListener: (String) -> Unit
+    ) {
+        movie?.let {
+            Picasso.get()
+                .load(IMAGE_URL + movie?.poster_path)
+                .placeholder(android.R.drawable.ic_menu_camera)
+                .resize(IMAGE_WIDTH, IMAGE_HEIGHT)
+                .centerCrop()
+                .into(itemView.movieImage)
+            itemView.setOnClickListener { onClickListener(movie.id) }
+        }
     }
 
     companion object {

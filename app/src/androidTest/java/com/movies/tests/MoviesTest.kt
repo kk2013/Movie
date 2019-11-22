@@ -1,4 +1,4 @@
-package com.movies
+package com.movies.tests
 
 import android.content.Intent
 import androidx.test.espresso.Espresso.onView
@@ -10,6 +10,9 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
 import com.chuck.util.EspressoIdlingResource
+import com.movies.MoviesActivity
+import com.movies.MoviesApplication
+import com.movies.R
 import com.movies.di.DaggerTestApplicationComponent
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer

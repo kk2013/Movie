@@ -6,7 +6,4 @@
         android:layout_width="@dimen/image_width"
         android:layout_height="wrap_content"
         android:padding="@dimen/xx_small_padding" />
-<!--        android:backgroundTint="@android:color/darker_gray"-->
-
-<!--        android:padding="@dimen/xx_small_padding" />-->
 </layout>

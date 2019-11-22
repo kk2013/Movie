@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.navArgs
 import com.movies.databinding.FragmentMovieDetailsBinding
 import com.movies.di.ViewModelFactory
 import dagger.android.support.DaggerFragment
@@ -20,17 +21,20 @@ class MovieDetailsFragment : DaggerFragment() {
         viewModelFactory
     }
 
+    val args: MovieDetailsFragmentArgs by navArgs()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentMovieDetailsBinding.inflate(inflater, container, false)
-        return binding.root
 
         movieDetailsViewModel.state.observe(this, Observer {
-            when(it) {
+            when (it) {
 //                MovieDetailsViewModel.MovieDetailsState.Loading ->
             }
         })
+        movieDetailsViewModel.getMovieDetails(args.movieId)
+        return binding.root
     }
 }

@@ -7,10 +7,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.movies.model.Movie
 
-class MoviesAdapter(private val onClickListener: (View, String) -> Unit) : PagedListAdapter<Movie, RecyclerView.ViewHolder>(DIFF_CALLBACK) {
+class MoviesAdapter(private val onClickListener: (String) -> Unit) : PagedListAdapter<Movie, RecyclerView.ViewHolder>(DIFF_CALLBACK) {
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        (holder as MovieViewHolder).bind(getItem(position))
+        (holder as MovieViewHolder).bind(getItem(position), onClickListener)
     }
 
     override fun onBindViewHolder(
@@ -20,7 +20,7 @@ class MoviesAdapter(private val onClickListener: (View, String) -> Unit) : Paged
     ) {
         if (payloads.isNotEmpty()) {
             val movie = getItem(position)
-            (holder as MovieViewHolder).bind(movie)
+            (holder as MovieViewHolder).bind(movie, onClickListener)
         } else {
             onBindViewHolder(holder, position)
         }
