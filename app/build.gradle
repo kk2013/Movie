@@ -47,6 +47,7 @@ dependencies {
     implementation 'androidx.paging:paging-runtime:2.1.0'
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+    implementation 'androidx.test.espresso:espresso-idling-resource:3.2.0'
     kapt "com.android.databinding:compiler:3.1.4"
 
     // Retrofit
@@ -80,5 +81,5 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     androidTestImplementation 'androidx.test.espresso.idling:idling-concurrent:3.2.0'
     androidTestImplementation 'com.jakewharton.espresso:okhttp3-idling-resource:1.0.0'
-    implementation 'androidx.test.espresso:espresso-idling-resource:3.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.2.0'
 }

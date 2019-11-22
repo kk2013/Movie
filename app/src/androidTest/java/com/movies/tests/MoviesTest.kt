@@ -3,9 +3,11 @@ package com.movies.tests
 import android.content.Intent
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.IdlingRegistry
+import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
-import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.espresso.contrib.RecyclerViewActions
+import androidx.test.espresso.contrib.RecyclerViewActions.scrollToPosition
+import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
@@ -14,6 +16,7 @@ import com.movies.MoviesActivity
 import com.movies.MoviesApplication
 import com.movies.R
 import com.movies.di.DaggerTestApplicationComponent
+import com.movies.movielist.MovieViewHolder
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.After
@@ -30,7 +33,6 @@ class MoviesTest {
         ActivityTestRule(MoviesActivity::class.java)
 
     private lateinit var mockWebServer: MockWebServer
-    private lateinit var moviesApplication: MoviesApplication
 
     @Before
     fun setUp() {
@@ -55,11 +57,28 @@ class MoviesTest {
 
     @Test
     fun getMoviesSucces() {
-        val response: String =
+        val moviesResponse =
             InstrumentationRegistry.getInstrumentation().context.assets.open("movies.json")
                 .bufferedReader().use { it.readText() }
-        mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(response))
+        mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(moviesResponse))
 
-        onView(withId(R.id.movies_recycler_view)).check(matches(isDisplayed()))
+        val detailsResponse =
+            InstrumentationRegistry.getInstrumentation().context.assets.open("movie_details.json")
+                .bufferedReader().use { it.readText() }
+        mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(detailsResponse))
+
+        onView(withId(R.id.movies_recycler_view)).perform(
+            RecyclerViewActions.actionOnItemAtPosition<MovieViewHolder>(
+                ITEM_BELOW_THE_FOLD,
+                click()
+            )
+        )
+
+        onView(withId(R.id.title)).check(matches(withText((TITLE))))
+    }
+
+    companion object {
+        const val ITEM_BELOW_THE_FOLD = 10
+        const val TITLE = "Mission: Impossible - Fallout"
     }
 }
