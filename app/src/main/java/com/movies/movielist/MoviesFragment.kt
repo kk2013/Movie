@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.movies.R
+import com.movies.data.NetworkState
 import com.movies.databinding.FragmentMoviesBinding
 import com.movies.di.ViewModelFactory
 import dagger.android.support.DaggerFragment
@@ -27,12 +28,13 @@ class MoviesFragment : DaggerFragment() {
         viewModelFactory
     }
 
-    private val moviesAdapter: MoviesAdapter = MoviesAdapter()
     private lateinit var layoutManager: LinearLayoutManager
+    private val moviesAdapter: MoviesAdapter = MoviesAdapter()
 //    private lateinit var gridLayoutManager: GridLayoutManager
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentMoviesBinding.inflate(inflater, container, false)
@@ -58,16 +60,12 @@ class MoviesFragment : DaggerFragment() {
         binding.moviesRecyclerView.layoutManager = layoutManager//gridLayoutManager
         binding.moviesRecyclerView.adapter = moviesAdapter
 
-        /*moviesViewModel.moviesRepo.observe(this, Observer {
-            Log.i("MOVIELOG", "Movies: ${it.size}")
-            moviesAdapter.submitList(it)
-        })*/
         moviesViewModel.moviesRepo.observe(this, Observer {
             Log.i("MOVIELOG", "Movies: ${it.size}")
             moviesAdapter.submitList(it)
         })
         moviesViewModel.networkState?.observe(this, Observer {
-            Log.i("MOVIELOG", "${it.status.name}")
+            Log.i("MOVIELOG1", "${it.status.name}")
             moviesAdapter.setNetworkState(it)
         })
 

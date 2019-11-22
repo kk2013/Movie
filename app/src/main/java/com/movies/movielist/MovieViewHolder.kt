@@ -1,6 +1,5 @@
 package com.movies.movielist
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,22 +8,15 @@ import com.movies.R
 import com.movies.model.Movie
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.movie_item_row.view.*
-import kotlinx.coroutines.withContext
 
 class MovieViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     fun bind(movie: Movie?) {
-        val imageUrl = IMAGE_URL + movie?.poster_path
-        Log.i("MOVIELOG", "Image url: $imageUrl")
-        with(itemView) {
-            movie_text.text = imageUrl
-        }
-        /*Picasso.get()
-//            .load(IMAGE_URL + movie?.posterPath)
-            .load(imageUrl)
+        Picasso.get()
+            .load(IMAGE_URL + movie?.poster_path)
             .resize(IMAGE_WIDTH, IMAGE_HEIGHT)
             .centerCrop()
-            .into(itemView.movieImage)*/
+            .into(itemView.movieImage)
     }
 
     companion object {

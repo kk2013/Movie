@@ -5,7 +5,6 @@
         android:layout_width="@dimen/image_width"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="@android:color/black"
         android:padding="@dimen/small_padding">
 
         <TextView
