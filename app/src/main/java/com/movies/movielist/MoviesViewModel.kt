@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations.switchMap
 import androidx.lifecycle.ViewModel
 import androidx.paging.PagedList
-import com.movies.data.MoviesDataSourceFactory
-import com.movies.data.MoviesRepository
-import com.movies.data.NetworkState
+import com.movies.movielist.data.MoviesDataSourceFactory
+import com.movies.movielist.data.MoviesRepository
+import com.movies.movielist.data.NetworkState
 import com.movies.model.Movie
 import javax.inject.Inject
 

@@ -13,7 +13,7 @@ class MoviesActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val binding: ActivityMoviesBinding = DataBindingUtil.setContentView(this, R.layout.activity_movies)
+        setContentView(R.layout.activity_movies)
 
         setSupportActionBar(toolbar)
     }

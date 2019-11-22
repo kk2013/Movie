@@ -9,13 +9,12 @@ import android.view.ViewTreeObserver
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.movies.R
-import com.movies.data.NetworkState
 import com.movies.databinding.FragmentMoviesBinding
 import com.movies.di.ViewModelFactory
+import com.movies.movielist.data.NetworkState
 import dagger.android.support.DaggerFragment
+import kotlinx.android.synthetic.main.fragment_movies.*
 import javax.inject.Inject
 import kotlin.math.roundToInt
 
@@ -28,9 +27,8 @@ class MoviesFragment : DaggerFragment() {
         viewModelFactory
     }
 
-    private lateinit var layoutManager: LinearLayoutManager
     private val moviesAdapter: MoviesAdapter = MoviesAdapter()
-//    private lateinit var gridLayoutManager: GridLayoutManager
+    private lateinit var gridLayoutManager: GridLayoutManager
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,14 +37,17 @@ class MoviesFragment : DaggerFragment() {
     ): View? {
         val binding = FragmentMoviesBinding.inflate(inflater, container, false)
 
-//        val moviesRecyclerView = binding.moviesRecyclerView
-        /*moviesRecyclerView.viewTreeObserver.addOnGlobalLayoutListener(
+        val moviesRecyclerView = binding.moviesRecyclerView
+        moviesRecyclerView.viewTreeObserver.addOnGlobalLayoutListener(
             object: ViewTreeObserver.OnGlobalLayoutListener {
                 override fun onGlobalLayout() {
                     moviesRecyclerView.viewTreeObserver.removeOnGlobalLayoutListener(this)
-                    val width = moviesRecyclerView.measuredWidth
+//                    val width = moviesRecyclerView.measuredWidth
+                    val width = resources.displayMetrics.widthPixels
+                    val widthDp = resources.displayMetrics.widthPixels/resources.displayMetrics.density
                     val imageWidth = resources.getDimension(R.dimen.image_width)
                     val spanCount = (width/imageWidth).roundToInt()
+                    Log.i("MOVIESLOG", "$width $widthDp $imageWidth $spanCount")
                     gridLayoutManager.spanCount = spanCount
                     gridLayoutManager.requestLayout()
                 }
@@ -54,19 +55,19 @@ class MoviesFragment : DaggerFragment() {
         )
 
         gridLayoutManager = GridLayoutManager(activity, 2)
-*/
-//        gridLayoutManager = LinearLayoutManager(activity)
-        layoutManager = LinearLayoutManager(activity)
-        binding.moviesRecyclerView.layoutManager = layoutManager//gridLayoutManager
+        binding.moviesRecyclerView.layoutManager = gridLayoutManager
         binding.moviesRecyclerView.adapter = moviesAdapter
 
         moviesViewModel.moviesRepo.observe(this, Observer {
-            Log.i("MOVIELOG", "Movies: ${it.size}")
             moviesAdapter.submitList(it)
         })
         moviesViewModel.networkState?.observe(this, Observer {
-            Log.i("MOVIELOG1", "${it.status.name}")
-            moviesAdapter.setNetworkState(it)
+            when(it) {
+                NetworkState.LOADING -> progress_bar.visibility = View.VISIBLE
+                NetworkState.SUCCESS -> progress_bar.visibility = View.GONE
+                NetworkState.FAILED -> progress_bar.visibility = View.GONE
+            }
+//            moviesAdapter.setNetworkState(it)
         })
 
         return binding.root

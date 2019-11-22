@@ -1,4 +1,4 @@
-package com.movies.data
+package com.movies.movielist.data
 
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PageKeyedDataSource
@@ -22,7 +22,6 @@ class MoviesDataSource(
                 try {
                     networkState.postValue(NetworkState.LOADING)
                     val movies = service.getMovies(1, params.requestedLoadSize)
-//                    Log.i("MOVIELOG", "Initial load: ${movies.results.size} Movies")
                     callback.onResult(movies.results, null, 2)
                     networkState.postValue(NetworkState.SUCCESS)
                 } catch (ex: Exception) {
@@ -43,7 +42,6 @@ class MoviesDataSource(
                     networkState.postValue(NetworkState.LOADING)
                     val page = params.key
                     val movies = service.getMovies(1, params.requestedLoadSize)
-//                    Log.i("MOVIELOG", "Initial load: ${movies.results.size} Movies")
                     callback.onResult(movies.results, page + 1)
                     networkState.postValue(NetworkState.SUCCESS)
                 } catch (ex: Exception) {

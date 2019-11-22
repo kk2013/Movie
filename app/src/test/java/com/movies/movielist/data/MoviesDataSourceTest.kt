@@ -1,4 +1,4 @@
-package com.movies.data
+package com.movies.movielist.data
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer

@@ -1,4 +1,4 @@
-package com.movies.data
+package com.movies.movielist.data
 
 import com.movies.api.MoviesService
 import org.junit.Assert.assertNotNull
