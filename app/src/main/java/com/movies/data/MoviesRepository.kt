@@ -32,8 +32,8 @@ class MoviesRepository @Inject constructor(private val moviesApi: MoviesApi) {
     suspend fun getMovieDetails(movieId: String): Movie = moviesApi.getMovieDetail(movieId)
 
     companion object {
-        const val PAGE_SIZE = 12
+        const val PAGE_SIZE = 30
         const val PREFETCH_SIZE = 6
-        const val INITIAL_LOAD_SIZE = 20
+        const val INITIAL_LOAD_SIZE = 40
     }
 }
