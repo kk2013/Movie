@@ -50,12 +50,9 @@ class MoviesFragment : DaggerFragment() {
             object: ViewTreeObserver.OnGlobalLayoutListener {
                 override fun onGlobalLayout() {
                     moviesRecyclerView.viewTreeObserver.removeOnGlobalLayoutListener(this)
-//                    val width = moviesRecyclerView.measuredWidth
                     val width = resources.displayMetrics.widthPixels
-                    val widthDp = resources.displayMetrics.widthPixels/resources.displayMetrics.density
                     val imageWidth = resources.getDimension(R.dimen.image_width)
                     val spanCount = (width/imageWidth).roundToInt()
-                    Log.i("MOVIESLOG", "$width $widthDp $imageWidth $spanCount")
                     gridLayoutManager.spanCount = spanCount
                     gridLayoutManager.requestLayout()
                 }

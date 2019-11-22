@@ -77,7 +77,7 @@ class MovieDetailsViewModelTest {
     }
 
     @Test
-    fun `correct states are loaded when movie details are requested and succesfully returned`() = coroutineTestRule.runBlockingTest {
+    fun `correct states are loaded when movie details are requested and successfully returned`() = coroutineTestRule.runBlockingTest {
 
         val movieId = "1234"
 
