@@ -21,12 +21,12 @@ class MoviesDataSource(
         wrapEspressoIdlingResource {
             runBlocking {
                 try {
-                    networkState.postValue(NetworkState.LOADING)
+                    networkState.postValue(NetworkState.Loading)
                     val movies = service.getMovies(1, params.requestedLoadSize)
                     callback.onResult(movies.results, null, 2)
-                    networkState.postValue(NetworkState.SUCCESS)
+                    networkState.postValue(NetworkState.Success)
                 } catch (ex: Exception) {
-                    networkState.postValue(NetworkState.FAILED)
+                    networkState.postValue(NetworkState.Failed)
                 }
             }
         }
@@ -40,13 +40,13 @@ class MoviesDataSource(
         wrapEspressoIdlingResource {
             runBlocking {
                 try {
-                    networkState.postValue(NetworkState.LOADING)
+                    networkState.postValue(NetworkState.Loading)
                     val page = params.key
                     val movies = service.getMovies(1, params.requestedLoadSize)
                     callback.onResult(movies.results, page + 1)
-                    networkState.postValue(NetworkState.SUCCESS)
+                    networkState.postValue(NetworkState.Success)
                 } catch (ex: Exception) {
-                    networkState.postValue(NetworkState.FAILED)
+                    networkState.postValue(NetworkState.Failed)
                 }
             }
         }

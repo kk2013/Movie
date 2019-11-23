@@ -6,7 +6,6 @@ import androidx.paging.PageKeyedDataSource
 import com.movies.TestCoroutineRule
 import com.movies.api.MoviesApi
 import com.movies.data.NetworkState
-import com.movies.data.Status
 import com.movies.model.Movie
 import com.movies.model.Movies
 import com.nhaarman.mockito_kotlin.*
@@ -68,8 +67,8 @@ class MoviesDataSourceTest {
 
         verify(mockInitialCallback, never()).onResult(emptyList(), null, 2)
         assertEquals(2, actualValues.size)
-        assertEquals(Status.LOADING, actualValues[0].status)
-        assertEquals(Status.FAILED, actualValues[1].status)
+        assertEquals(NetworkState.Loading, actualValues[0])
+        assertEquals(NetworkState.Failed, actualValues[1])
     }
 
     @Test
@@ -83,8 +82,8 @@ class MoviesDataSourceTest {
 
         verify(mockInitialCallback).onResult(emptyList(), null, 2)
         assertEquals(2, actualValues.size)
-        assertEquals(Status.LOADING, actualValues[0].status)
-        assertEquals(Status.SUCCESS, actualValues[1].status)
+        assertEquals(NetworkState.Loading, actualValues[0])
+        assertEquals(NetworkState.Success, actualValues[1])
     }
 
     @Test
@@ -98,8 +97,8 @@ class MoviesDataSourceTest {
 
         verify(mockCallback, never()).onResult(emptyList(), 3)
         assertEquals(2, actualValues.size)
-        assertEquals(Status.LOADING, actualValues[0].status)
-        assertEquals(Status.FAILED, actualValues[1].status)
+        assertEquals(NetworkState.Loading, actualValues[0])
+        assertEquals(NetworkState.Failed, actualValues[1])
     }
 
     @Test
@@ -113,7 +112,7 @@ class MoviesDataSourceTest {
 
         verify(mockCallback).onResult(emptyList(), 3)
         assertEquals(2, actualValues.size)
-        assertEquals(Status.LOADING, actualValues[0].status)
-        assertEquals(Status.SUCCESS, actualValues[1].status)
+        assertEquals(NetworkState.Loading, actualValues[0])
+        assertEquals(NetworkState.Success, actualValues[1])
     }
 }

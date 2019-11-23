@@ -1,29 +1,16 @@
 package com.movies.movielist
 
-import android.view.View
 import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.movies.model.Movie
 
-class MoviesAdapter(private val onClickListener: (String) -> Unit) : PagedListAdapter<Movie, RecyclerView.ViewHolder>(DIFF_CALLBACK) {
+class MoviesAdapter(private val onClickListener: (String) -> Unit) :
+    PagedListAdapter<Movie, RecyclerView.ViewHolder>(DIFF_CALLBACK) {
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         (holder as MovieViewHolder).bind(getItem(position), onClickListener)
-    }
-
-    override fun onBindViewHolder(
-        holder: RecyclerView.ViewHolder,
-        position: Int,
-        payloads: MutableList<Any>
-    ) {
-        if (payloads.isNotEmpty()) {
-            val movie = getItem(position)
-            (holder as MovieViewHolder).bind(movie, onClickListener)
-        } else {
-            onBindViewHolder(holder, position)
-        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
