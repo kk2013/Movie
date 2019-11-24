@@ -17,7 +17,7 @@ class MovieViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     ) {
         movie?.let {
             Picasso.get()
-                .load(IMAGE_URL + movie?.poster_path)
+                .load(IMAGE_URL + movie.poster_path)
                 .placeholder(android.R.drawable.ic_menu_camera)
                 .resize(IMAGE_WIDTH, IMAGE_HEIGHT)
                 .centerCrop()

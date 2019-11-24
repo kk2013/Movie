@@ -6,8 +6,8 @@ import androidx.lifecycle.viewModelScope
 import com.chuck.util.wrapEspressoIdlingResource
 import com.movies.data.MoviesRepository
 import com.movies.model.Movie
-import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlinx.coroutines.launch
 
 class MovieDetailsViewModel @Inject constructor(private val movieDetailsRepository: MoviesRepository) :
     ViewModel() {

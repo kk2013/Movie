@@ -10,7 +10,8 @@ import com.movies.model.Movie
 import com.movies.movielist.data.MoviesDataSourceFactory
 import javax.inject.Inject
 
-class MoviesViewModel @Inject constructor(private val moviesRepo: MoviesRepository
+class MoviesViewModel @Inject constructor(
+    private val moviesRepo: MoviesRepository
 ) : ViewModel() {
 
     private val dataSourceFactory: MoviesDataSourceFactory = moviesRepo.createMoviesDataSource()

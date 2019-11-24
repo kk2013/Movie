@@ -14,5 +14,4 @@ class MoviesDataSourceFactory(private val service: MoviesApi) : DataSource.Facto
         moviesLiveData.postValue(source)
         return source
     }
-
 }

@@ -14,9 +14,9 @@ import com.movies.data.NetworkState
 import com.movies.databinding.FragmentMoviesBinding
 import com.movies.di.ViewModelFactory
 import dagger.android.support.DaggerFragment
-import kotlinx.android.synthetic.main.fragment_movies.*
 import javax.inject.Inject
 import kotlin.math.roundToInt
+import kotlinx.android.synthetic.main.fragment_movies.*
 
 class MoviesFragment : DaggerFragment() {
 

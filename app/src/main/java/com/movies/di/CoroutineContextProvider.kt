@@ -1,8 +1,8 @@
 package com.movies.di
 
-import kotlinx.coroutines.Dispatchers
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
+import kotlinx.coroutines.Dispatchers
 
 open class CoroutineContextProvider @Inject constructor() {
     open val Main: CoroutineContext by lazy { Dispatchers.Main }

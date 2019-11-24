@@ -1,9 +1,9 @@
 package com.movies.movielist
 
 import androidx.lifecycle.MutableLiveData
+import com.movies.data.MoviesRepository
 import com.movies.movielist.data.MoviesDataSource
 import com.movies.movielist.data.MoviesDataSourceFactory
-import com.movies.data.MoviesRepository
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.verify

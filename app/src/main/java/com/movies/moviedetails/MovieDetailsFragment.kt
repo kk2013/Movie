@@ -13,9 +13,9 @@ import com.movies.model.Movie
 import com.movies.movielist.MovieViewHolder
 import com.squareup.picasso.Picasso
 import dagger.android.support.DaggerFragment
+import javax.inject.Inject
 import kotlinx.android.synthetic.main.fragment_movie_details.*
 import kotlinx.android.synthetic.main.movie_item_row.view.*
-import javax.inject.Inject
 
 class MovieDetailsFragment : DaggerFragment() {
 
@@ -29,7 +29,8 @@ class MovieDetailsFragment : DaggerFragment() {
     private val args: MovieDetailsFragmentArgs by navArgs()
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentMovieDetailsBinding.inflate(inflater, container, false)

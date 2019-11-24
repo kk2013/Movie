@@ -22,10 +22,10 @@ abstract class MoviesModule {
     @Binds
     @IntoMap
     @ViewModelKey(MoviesViewModel::class)
-    abstract fun bindsMoviesViewModel(viewModel: MoviesViewModel) : ViewModel
+    abstract fun bindsMoviesViewModel(viewModel: MoviesViewModel): ViewModel
 
     @Binds
     @IntoMap
     @ViewModelKey(MovieDetailsViewModel::class)
-    abstract fun bindsMovieDetailsViewModel(viewModel: MovieDetailsViewModel) : ViewModel
+    abstract fun bindsMovieDetailsViewModel(viewModel: MovieDetailsViewModel): ViewModel
 }
