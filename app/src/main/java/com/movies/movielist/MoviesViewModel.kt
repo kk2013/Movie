@@ -11,16 +11,16 @@ import com.movies.movielist.data.MoviesDataSourceFactory
 import javax.inject.Inject
 
 class MoviesViewModel @Inject constructor(
-    private val moviesRepo: MoviesRepository
+    moviesRepo: MoviesRepository
 ) : ViewModel() {
 
     private val dataSourceFactory: MoviesDataSourceFactory = moviesRepo.createMoviesDataSource()
 
     var moviesList: LiveData<PagedList<Movie>>
-    var networkState: LiveData<NetworkState>?
+    var networkState: LiveData<NetworkState>
 
     init {
         this.moviesList = moviesRepo.getMovies(dataSourceFactory)
-        networkState = switchMap(dataSourceFactory.moviesLiveData, { it.networkState })
+        networkState = switchMap(dataSourceFactory.moviesLiveData) { it.networkState }
     }
 }
