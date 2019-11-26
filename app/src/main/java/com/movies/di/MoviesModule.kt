@@ -1,6 +1,7 @@
 package com.movies.di
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.movies.moviedetails.MovieDetailsFragment
 import com.movies.moviedetails.MovieDetailsViewModel
 import com.movies.movielist.MoviesFragment
@@ -13,7 +14,10 @@ import dagger.multibindings.IntoMap
 @Module
 abstract class MoviesModule {
 
-    @ContributesAndroidInjector(modules = [ViewModelBuilder::class])
+    @Binds
+    internal abstract fun bindsViewModelFactory(viewModelFactory: ViewModelFactory) : ViewModelProvider.Factory
+
+    @ContributesAndroidInjector
     internal abstract fun moviesFragment(): MoviesFragment
 
     @ContributesAndroidInjector
