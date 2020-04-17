@@ -1,7 +1,5 @@
 package com.movies.di
 
-import androidx.test.espresso.IdlingResource
-import com.jakewharton.espresso.OkHttp3IdlingResource
 import com.movies.BuildConfig
 import com.movies.api.MoviesApi
 import com.movies.utils.LiveDataCallAdapterFactory
@@ -15,7 +13,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import okhttp3.mockwebserver.MockWebServer
 import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.moshi.MoshiConverterFactory
 
 @Module
 class TestNetworkModule {
@@ -60,7 +58,7 @@ class TestNetworkModule {
             val builder = request.newBuilder()
             val url = request.url
                 .newBuilder()
-                .addQueryParameter("api_key", "9228b5e724e8040388b1f2590732462b")
+                .addQueryParameter("api_key", BuildConfig.API_KEY)
                 .build()
             builder.url(url)
             chain.proceed(builder.build())
@@ -82,7 +80,7 @@ class TestNetworkModule {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(okHttpClient)
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(MoshiConverterFactory.create())
             .addCallAdapterFactory(LiveDataCallAdapterFactory())
             .build()
     }

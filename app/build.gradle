@@ -31,6 +31,9 @@ android {
     dataBinding {
         enabled = true
     }
+    defaultConfig {
+        buildConfigField "String", 'API_KEY', '"9228b5e724e8040388b1f2590732462b"'
+    }
 }
 
 dependencies {
@@ -47,7 +50,6 @@ dependencies {
     implementation 'androidx.paging:paging-runtime:2.1.0'
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
-    implementation 'androidx.test.espresso:espresso-idling-resource:3.2.0'
     kapt "com.android.databinding:compiler:3.1.4"
 
     // Retrofit
