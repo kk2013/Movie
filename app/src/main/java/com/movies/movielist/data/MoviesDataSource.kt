@@ -2,7 +2,6 @@ package com.movies.movielist.data
 
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PageKeyedDataSource
-import com.chuck.util.wrapEspressoIdlingResource
 import com.movies.api.MoviesApi
 import com.movies.data.NetworkState
 import com.movies.model.Movie
@@ -18,16 +17,14 @@ class MoviesDataSource(
         params: LoadInitialParams<Int>,
         callback: LoadInitialCallback<Int, Movie>
     ) {
-        wrapEspressoIdlingResource {
-            runBlocking {
-                try {
-                    networkState.postValue(NetworkState.Loading)
-                    val movies = service.getMovies(1, params.requestedLoadSize)
-                    callback.onResult(movies.results, null, 2)
-                    networkState.postValue(NetworkState.Success)
-                } catch (ex: Exception) {
-                    networkState.postValue(NetworkState.Failed)
-                }
+        runBlocking {
+            try {
+                networkState.postValue(NetworkState.Loading)
+                val movies = service.getMovies(1, params.requestedLoadSize)
+                callback.onResult(movies.results, null, 2)
+                networkState.postValue(NetworkState.Success)
+            } catch (ex: Exception) {
+                networkState.postValue(NetworkState.Failed)
             }
         }
     }
@@ -37,17 +34,15 @@ class MoviesDataSource(
     }
 
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, Movie>) {
-        wrapEspressoIdlingResource {
-            runBlocking {
-                try {
-                    networkState.postValue(NetworkState.Loading)
-                    val page = params.key
-                    val movies = service.getMovies(1, params.requestedLoadSize)
-                    callback.onResult(movies.results, page + 1)
-                    networkState.postValue(NetworkState.Success)
-                } catch (ex: Exception) {
-                    networkState.postValue(NetworkState.Failed)
-                }
+        runBlocking {
+            try {
+                networkState.postValue(NetworkState.Loading)
+                val page = params.key
+                val movies = service.getMovies(1, params.requestedLoadSize)
+                callback.onResult(movies.results, page + 1)
+                networkState.postValue(NetworkState.Success)
+            } catch (ex: Exception) {
+                networkState.postValue(NetworkState.Failed)
             }
         }
     }

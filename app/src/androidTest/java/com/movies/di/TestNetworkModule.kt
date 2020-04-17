@@ -1,5 +1,7 @@
 package com.movies.di
 
+import androidx.test.espresso.IdlingResource
+import com.jakewharton.espresso.OkHttp3IdlingResource
 import com.movies.BuildConfig
 import com.movies.api.MoviesApi
 import com.movies.utils.LiveDataCallAdapterFactory

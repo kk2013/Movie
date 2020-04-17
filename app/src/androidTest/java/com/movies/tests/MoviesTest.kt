@@ -2,7 +2,6 @@ package com.movies.tests
 
 import android.content.Intent
 import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.IdlingRegistry
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions
@@ -11,7 +10,6 @@ import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
-import com.chuck.util.EspressoIdlingResource
 import com.movies.MoviesActivity
 import com.movies.MoviesApplication
 import com.movies.R
@@ -39,7 +37,6 @@ class MoviesTest {
         val instrumentation = InstrumentationRegistry.getInstrumentation()
         val app = instrumentation.targetContext.applicationContext as MoviesApplication
         mockWebServer = DaggerTestApplicationComponent.factory().create(app).getMockWebserver()
-        IdlingRegistry.getInstance().register(EspressoIdlingResource.countingIdlingResource)
 
         val intent = Intent(
             InstrumentationRegistry.getInstrumentation()
@@ -52,7 +49,6 @@ class MoviesTest {
     @After
     fun tearDown() {
         mockWebServer.shutdown()
-        IdlingRegistry.getInstance().unregister(EspressoIdlingResource.countingIdlingResource)
     }
 
     @Test
